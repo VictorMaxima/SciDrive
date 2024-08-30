@@ -1,0 +1,71 @@
+{% extends 'App/base.html' %}
+{% load static%}
+{% block content%}
+<section data-bs-version="5.1" class="form1 cid-umVnJXDtWd" id="form01-21">
+	<div class="container">
+		<div class="row content-wrapper justify-content-center">
+			<div class="col-lg-7 mbr-form">
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<h5 class="mbr-section-title mbr-fonts-style mb-5 display-2">
+						<strong>SciDrive, here to serve your needs</strong>
+					</h5>
+				</div>
+
+				<div class="text-wrapper align-left">
+					<!--Formbuilder Form-->
+					<form action="/" method="get" class="mbr-form form-with-styler" data-verified="">
+						<div class="row">
+							
+							<div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">
+								Oops...! some problem!
+							</div>
+						</div>
+						<div class="dragArea row">
+							<div class="col-lg-6 col-md-6 col-sm-12 form-group">
+								<input placeholder="search for articles, publications etc" name="q" data-form-field="email" class="form-control display-7" value="{{request.GET.q}}" id="email-form01-21">
+							</div>
+							<div class="col-auto mbr-section-btn">
+								<button type="submit" class="w-100 w-100 w-100 w-100 w-100 w-100 btn btn-secondary display-7">Search</button>
+							</div>
+						</div>
+					</form>
+					<!--Formbuilder Form-->
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section data-bs-version="5.1" class="people01 cid-tYogfb9DbG" id="people01-1r">
+    <div class="container">
+      <div class="row">
+  
+        <div class="">{% for Result in Results%}
+          <div class="item features-without-image">
+            <div class="item-wrapper">
+              <div class="row align-items-center">
+                <div class="col-md-7">
+                  <div class="align-left">
+                    <h3 class="mbr-section-title mbr-fonts-style mb-2 display-5"><strong>{{Result.title}}</strong></h3>
+                    <h4 class="mbr-section-subtitle mbr-fonts-style mb-3 display-7">
+                      {{Result.snippet}}
+                    </h4>
+                    <p class="mbr-section-text mbr-fonts-style mb-0 display-7">
+                      Full-time<br>
+                    </p>
+                  </div>
+                </div>
+  
+                <div class="col-md-5">
+                  <div class="mbr-section-btn align-right">
+                    <a class="btn btn-black display-7" href="{{Result.link}}"><strong>
+                        More</strong></a>
+                  </div>
+                </div>{%endfor%}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{%endblock%}
