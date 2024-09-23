@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from resources.models import SearchResult, Keyword
-from resources.SCHOLAR import Command
+from resources.scholar import Command
 from resources.pubmed import pub_med
 # Create your views here.
 
