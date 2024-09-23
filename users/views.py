@@ -8,13 +8,13 @@ from .forms import CustomUserCreationForm, LoginForm
 
 def login_view(request):
     if request.method == 'POST':
-        form = AuthenticationForm(request, data=request.POST)
+        form = LoginForm(request, data=request.POST)
         if form.is_valid():
             user = form.get_user()
             login(request, user)
             return redirect('home')
     else:
-        form = AuthenticationForm()
+        form = LoginForm()
     return render(request, 'login_2.html', {'form': form})
 
 def logout_view(request):

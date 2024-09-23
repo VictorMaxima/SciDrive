@@ -1,0 +1,33 @@
+{% extends 'App/base.html' %}
+{% block content %}
+{% load static%}
+
+<section data-bs-version="5.1" class="header1 cid-tJS9vXDdRK" id="header01-7">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-12 col-md-12 col-lg-7 image-wrapper">
+			{% for image in about.image.all %}
+				<img class="w-100" src="{{image.Image.url}}" alt="{{image}}">
+			{% endfor %}
+			</div>
+			<div class="col-12 col-lg col-md-12">
+				<div class="text-wrapper align-left">
+					<h1 class="mbr-section-title mbr-fonts-style mb-4 display-2"><strong>About us</strong></h1>
+					<p class="mbr-text mbr-fonts-style mb-4 display-7">
+Welcome to Scidrive, your premier destination for scholarly research and academic resources.
+Our platform is designed to seamlessly connect researchers, students, and academics with
+a comprehensive database of scholarly articles, theses, and conference papers from across the globe.
+By leveraging advanced search algorithms and an intuitive interface, we empower users to easily discover 
+and access high-quality academic content, track research trends, and stay updated with the latest advancements
+in their fields. SciDrive aims to facilitate knowledge dissemination and foster academic collaboration by providing 
+a reliable and user-friendly tool for navigating the vast world of scholarly information
+Feel free to replace “[Project Name]” with the actual name of your project!</p>
+					<div class="mbr-section-btn mt-3"><a class="btn btn-primary display-7" href="{% url "login" %}">Register now</a></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section data-bs-version="5.1" class="features15 cid-tLek7gQhG7" id="features015-m">
+{% endblock%}

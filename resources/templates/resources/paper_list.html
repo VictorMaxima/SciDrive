@@ -1,0 +1,25 @@
+{% extends "App/base.html" %}
+{% block content %}
+<h1>List of your addresses:</h1>
+{% for paper in object_list %}
+<p>
+{{ paper.title }}<br>
+{{ paper.abstract }}<br>
+<img src="{{paper.picture.url}}" alt="cover">
+<a href="{{ paper.file.url}}">See paper </a><br>
+{{ paper.upload_date }}<br>
+</p>
+<p>
+<a href="{% url "update_paper" paper.id %}">Update paper</a>
+</p>
+<p>
+<a href="{% url "paper_delete" paper.id %}">Delete Paper</a>
+</p>
+{% if not forloop.last %}
+<hr>
+{% endif %}
+{% endfor %}
+<p>
+<a href="{% url "create_paper" %}">Add new paper</a>
+</p>
+{% endblock content %}

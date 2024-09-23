@@ -2,24 +2,18 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 import logging
 logger = logging.getLogger(__name__)
-from django.contrib.auth.backends import BaseBackend
 from django.contrib.auth.forms import UsernameField
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
-
-class CustomUserCreationForm(UserCreationForm):
-    email = forms.EmailField(required=True)
-    
-    class Meta:
-        model = User
-        fields = ('username','first_name', 'last_name', 'email', 'password1',
-         'password2')
-        field_classes = {"email": UsernameField}
+from .models import Individual
+from django.contrib.auth.backends import BaseBackend
 
 class MyBackend(BaseBackend):
     def authenticate( request, email=None, password=None):
         try:
-            user = Individual.objects.get(email=email, password=password)
+            user = Individual.objects.get(email=email)
+            if user.check_password(password):
+                return user
         except Individual.DoesNotExist:
             print(Individual.objects)
             return None
@@ -31,6 +25,15 @@ class MyBackend(BaseBackend):
             return Individual.objects.get(pk=client_id)
         except Individual.DoesNotExist:
             return None
+
+class CustomUserCreationForm(UserCreationForm):
+    email = forms.EmailField(required=True)
+    
+    class Meta:
+        model = Individual
+        fields = ('username','first_name', 'last_name', 'email', 'password1',
+         'password2', 'nationality', "field", 'school', 'degree')
+        field_classes = {"email": UsernameField}
 
 class LoginForm(forms.Form):
     email = forms.EmailField()
@@ -47,7 +50,7 @@ class LoginForm(forms.Form):
         print(email)
         print(password)
         if email and password:
-            self.User = authenticate(
+            self.User = MyBackend.authenticate(
                 self.request, email=email, password=password
             )
             if self.User is None:

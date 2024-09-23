@@ -25,6 +25,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("users.urls")),
+    path("", include("resources.urls")),
     path("", app_views.index, name="home"),
-    path("accounts/login/", auth_views.LoginView.as_view(template_name="users/login.html", form_class=forms.LoginForm))
+    path("about", app_views.about, name="about"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -3,6 +3,9 @@ from resources.models import SearchResult, Keyword
 from resources.SCHOLAR import Command
 from resources.pubmed import pub_med
 # Create your views here.
+
+def about(request):
+    return render(request, "App/about.html")
 def index(request):
     q = request.GET.get('q', None)
     items = []
@@ -11,12 +14,14 @@ def index(request):
     elif q is not None:
         keywords = Keyword.objects.filter(title__contains=q)
         if len(keywords) == 0:
-            Command.handle(query=q, num_results=80)
-            pub_med(query=q, max_results=80)
+            a = Command()
+            a.handle(query=q, num_results=80)
             print("command")
         for keyword in keywords:
             print("keyword")
+            print(keyword.results)
             for result in keyword.results.all():
                 items.append(result)
+                print(result)
     return render(request, 'App/index_2.html', {'Results': \
         items})

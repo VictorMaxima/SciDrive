@@ -12,11 +12,11 @@ class Command(BaseCommand):
         parser.add_argument('query', type=str)
         parser.add_argument('--num_results', type=int, default=10)
 
-    def handle( *args, **options):
+    def handle( self, *args, **options):
         print("here")
         query = options['query']
         num_results = options['num_results']
-        base_url = "https://scholar.google.com/scholar"
+        base_url = "https://www.google.com/scholar"
         params = {
             "q": query,
             "hl": "en"  # Language of the search results
@@ -29,6 +29,7 @@ class Command(BaseCommand):
         new_keyword.save()
         page = 0
         while True:
+            print("here")
             params['start'] = page * 10
             response = requests.get(base_url, params=params, headers=headers)
             if response.status_code != 200:
@@ -37,6 +38,7 @@ class Command(BaseCommand):
             
             soup = BeautifulSoup(response.text, 'html.parser')
             search_results = soup.find_all('div', class_='gs_ri')
+            print(soup)
             
             if not search_results:
                 break
